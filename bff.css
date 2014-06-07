@@ -1,0 +1,63 @@
+body
+{
+	background: #f2f0e8;
+	padding: 0px;
+	margin: 0px;
+	height:100%;
+	font-family: verdana, arial, sans-serif;
+	font-size:.8em;
+}
+
+html
+{
+	height:100%;
+}
+
+a { font-family: Verdana, sans-serif; color: #7a011b; font-weight: bold; text-decoration: none; }
+a:hover { font-family: Verdana, sans-serif; color: #af3601; font-weight: bold; text-decoration: none;}
+
+hr { height:1px; }
+img 
+{
+	border: none; 
+	padding: 0;
+	margin: 0;
+}
+
+div.toplogo
+{
+	text-align:left;
+	width: 100%;
+	background:#FFFFFF url(images/gradient_top.png);
+	background-position:top;
+	background-repeat: repeat-x;
+}
+
+td.smallbox
+{
+	border: 1px solid #AAAAAA;
+	background:#DDDDDD; 
+	padding: 7px;
+	text-align:center;
+	width: 100px;
+	height:100px;
+	margin: 10px;
+}
+
+.shadowbox {
+  background: #ccc;
+  position: relative;
+  top: 2px;
+  left: 2px;
+  width: 500px;
+  margin-left: 82px;
+}
+.shadowbox-inner {
+  background: #dbd5bf;
+  border: 2px solid #000;
+  color: #000000;
+  padding: 10px;
+  position: relative;
+  top: -2px;
+  left: -2px;
+}
