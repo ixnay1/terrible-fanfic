@@ -1,34 +1,9 @@
 <?
 	include('database.php');
-	require('_drawrating.php');
 
-	if(intval($_GET['t1']) > 0 || intval($_GET['t2']) > 0 || intval($_GET['th']) > 0)
-	{
-		$show1 = intval($_GET['t1']);
-		$show2 = intval($_GET['t2']);
-		$randNum2 = intval($_GET['th']);
-	}
-	else
-	{
-		$sourceList = array();
-	
-		$thing_size = sql_get_single("SELECT count(*) FROM bff_things");
-		$theme_size = sql_get_single("SELECT count(*) FROM bff_themes");
-	
-		$show1 = 0;
-		$show2 = 0;
-		while($show1 == $show2) {
-			$show1 = rand( 1, $thing_size);
-			$show2 = rand( 1, $thing_size);
-		}	
-		$randNum2 = rand( 1, $theme_size);
-	}
-	$thing1 = trim(sql_get_single("SELECT thing_name FROM bff_things WHERE thing_id = $show1"));
-	$thing2 = trim(sql_get_single("SELECT thing_name FROM bff_things WHERE thing_id = $show2"));
-	$theme  = trim(sql_get_single("SELECT theme_name FROM bff_themes WHERE theme_id = $randNum2"));
-	if(!$thing1) { $thing1 = "Mass Effect"; }
-	if(!$thing2) { $thing2 = "Dance Central"; }
-	if(!$theme){ $theme = "murder most foul"; }
+	$thing1 = trim(sql_get_single("SELECT thing_name FROM bff_things ORDER BY RAND() LIMIT 1"));
+	$thing2 = trim(sql_get_single("SELECT thing_name FROM bff_things WHERE thing_name != '".addslashes($thing1) ."' ORDER BY RAND() LIMIT 1"));
+	$theme  = trim(sql_get_single("SELECT theme_name FROM bff_themes ORDER BY RAND() LIMIT 1"));
 	
 	//facebook stuff
 	$fb_string = "Your challenge is to write crossover fanfiction combining $thing1 and {$thing2}.  The story should use $theme as a plot device!";
@@ -38,10 +13,11 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html itemscope itemtype="http://schema.org/">
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Raleway:800|Noticia+Text' rel='stylesheet' type='text/css'>
+	<style>
+		@font-face{font-family:'Noticia Text';font-style:normal;font-weight:400;src:local('Noticia Text'),local('NoticiaText-Regular'),url(http://themes.googleusercontent.com/static/fonts/noticiatext/v4/wdyV6x3eKpdeUPQ7BJ5uUHhCUOGz7vYGh680lGh-uXM.woff) format('woff')}@font-face{font-family:Raleway;font-style:normal;font-weight:800;src:local('Raleway ExtraBold'),local('Raleway-ExtraBold'),url(http://themes.googleusercontent.com/static/fonts/raleway/v7/1ImRNPx4870-D9a1EBUdPBsxEYwM7FgeyaSgU71cLG0.woff) format('woff')}body{background:#f2f0e8;background-image:url(images/bedge_grunge.png);background-position:left;background-repeat:repeat;padding:0;margin:auto;height:100%;width:100%;font-family:Helvetica,arial,sans-serif;font-size:.8em}html{height:100%}div.main{width:100%;text-align:center;padding-top:40px}h1.toplogo{font-family:Raleway,sans-serif;font-weight:800;font-size:56px;width:600px;text-align:left;color:#FFF;display:inline-block;margin:0}.main .toplogo:hover{-webkit-transform:scale(1.05);-moz-transform:scale(1.05);transform:scale(1.05);-webkit-animation-iteration-count:1;-moz-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;transition:all .1s ease-in-out;cursor:pointer}.main .toplogo:active{-webkit-transition:all .1s ease-in-out;-moz-transition:all .1s ease-in-out;transition:all .1s ease-in-out;-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1);-webkit-animation-iteration-count:1;-moz-animation-iteration-count:1;animation-iteration-count:1}span.highlight{color:#7a011b}div.maintext{height:200px;background-color:rgba(219,213,191,.6);width:100%;margin-top:40px}div.storyidea{display:inline-block;max-width:800px;font-family:'Noticia Text',serif;font-size:2em;text-align:left;padding:15px 0}.utils div{margin:5px 15px;display:inline-block}div.bannerad{margin:5px 0}div.social{position:fixed;left:0;bottom:0}
+	</style>
 	<title>The Terrible Crossover Fanfiction Idea Generator</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-	<LINK REL=stylesheet HREF="fanfic.css" TYPE="text/css">
 	<link rel="shortcut icon" href="favicon.ico">
 	<script type="text/javascript">
 
